@@ -3,11 +3,11 @@
 # from http://sebsauvage.net/python/gui/#our_project
 # this was written for Python 2.7
 
-import Tkinter
+import tkinter
 
-class simpleapp_tk(Tkinter.Tk):
+class simpleapp_tk(tkinter.Tk):
     def __init__(self,parent):
-        Tkinter.Tk.__init__(self,parent)
+        tkinter.Tk.__init__(self,parent)
         self.parent = parent
         self.initialize()
 
