@@ -21,7 +21,8 @@ class simpleapp_tk(tkinter.Tk):
                                 command=self.OnButtonClick)
         button.grid(column=1,row=0)
 
-        label = tkinter.Label(self,
+        self.labelVar = tkinter.StringVar()
+        label = tkinter.Label(self, textvariable = self.labelVar,
                               anchor="w",fg="white",bg="blue")
         #label will cover column 0 and 1
         label.grid(column=0,row=1,columnspan=2,sticky='EW') 
@@ -30,11 +31,11 @@ class simpleapp_tk(tkinter.Tk):
         self.resizable(True,False)
 
     def OnButtonClick(self):
-        print( "You pclicked the button!")
+        self.labelVar.set( "You clicked the button!")
         
     def OnPressEnter(self,event):
-        print( "You pressed enter !" ) #need parens for Python 3.3
-
+        self.labelVar.set( "You pressed enter !" )
+        
 if __name__ == "__main__":
     app = simpleapp_tk(None)
     app.title('my application')
