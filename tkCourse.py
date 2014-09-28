@@ -12,7 +12,28 @@ class simpleapp_tk(tkinter.Tk):
         self.initialize()
 
     def initialize(self):
-        pass 
+        self.grid() 
+        self.entry = tkinter.Entry(self)
+        self.entry.grid(column=0,row=0,sticky='EW')
+        self.entry.bind("<Return>", self.OnPressEnter)
+
+        button = tkinter.Button(self,text=u"Click me !",
+                                command=self.OnButtonClick)
+        button.grid(column=1,row=0)
+
+        label = tkinter.Label(self,
+                              anchor="w",fg="white",bg="blue")
+        #label will cover column 0 and 1
+        label.grid(column=0,row=1,columnspan=2,sticky='EW') 
+        self.grid_columnconfigure(0,weight=1) #resize column 0
+        #only resize columns
+        self.resizable(True,False)
+
+    def OnButtonClick(self):
+        print( "You pclicked the button!")
+        
+    def OnPressEnter(self,event):
+        print( "You pressed enter !" ) #need parens for Python 3.3
 
 if __name__ == "__main__":
     app = simpleapp_tk(None)
