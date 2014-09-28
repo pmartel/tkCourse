@@ -13,28 +13,44 @@ class simpleapp_tk(tkinter.Tk):
 
     def initialize(self):
         self.grid() 
-        self.entry = tkinter.Entry(self)
+
+        self.entryVariable = tkinter.StringVar()
+        self.entry = tkinter.Entry(self,textvariable=self.entryVariable)
         self.entry.grid(column=0,row=0,sticky='EW')
         self.entry.bind("<Return>", self.OnPressEnter)
+        self.entryVariable.set(u"Enter text here.")
 
         button = tkinter.Button(self,text=u"Click me !",
                                 command=self.OnButtonClick)
         button.grid(column=1,row=0)
 
-        self.labelVar = tkinter.StringVar()
-        label = tkinter.Label(self, textvariable = self.labelVar,
+        self.labelVariable = tkinter.StringVar()
+        label = tkinter.Label(self, textvariable = self.labelVariable,
                               anchor="w",fg="white",bg="blue")
         #label will cover column 0 and 1
         label.grid(column=0,row=1,columnspan=2,sticky='EW') 
+        self.labelVariable.set(u"Hello !")
+        
         self.grid_columnconfigure(0,weight=1) #resize column 0
         #only resize columns
         self.resizable(True,False)
+        self.update()
+        self.geometry(self.geometry())       
+
+        self.entry.focus_set()
+        self.entry.selection_range(0, tkinter.END)
 
     def OnButtonClick(self):
-        self.labelVar.set( "You clicked the button!")
+        self.labelVariable.set( self.entryVariable.get()+
+                                " You clicked the button!")
+        self.entry.focus_set()
+        self.entry.selection_range(0, tkinter.END)
         
     def OnPressEnter(self,event):
-        self.labelVar.set( "You pressed enter !" )
+        self.labelVariable.set( self.entryVariable.get()+
+                                " You pressed enter !" )
+        self.entry.focus_set()
+        self.entry.selection_range(0, tkinter.END)
         
 if __name__ == "__main__":
     app = simpleapp_tk(None)
